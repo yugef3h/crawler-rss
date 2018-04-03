@@ -1,0 +1,24 @@
+{
+  "name": "crawler",
+  "version": "1.0.0",
+  "description": "爬虫案例",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "blackatall",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "cheerio": "^1.0.0-rc.2",
+    "superagent": "^3.8.2",
+    "eventproxy": "",
+    "superagent-charset": "",
+    "feedparser": "",
+    "iconv-lite": "",
+    "mysql": ""
+  },
+  "devDependencies": {
+    "feedparser": "^2.2.9"
+  }
+}

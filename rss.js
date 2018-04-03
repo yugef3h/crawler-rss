@@ -1,10 +1,10 @@
-var request         = require("superagent"),
+var request = require("superagent"),
     charsetCompoent = require('superagent-charset'),
-    superagent      = charsetCompoent(request),
-    eventproxy      = require("eventproxy"),
-    feedparser      = require("feedparser"),
-    iconv           = require("iconv-lite"),
-    fs              = require("fs");
+    superagent = charsetCompoent(request),
+    eventproxy = require("eventproxy"),
+    feedparser = require("feedparser"),
+    iconv = require("iconv-lite"),
+    fs = require("fs");
 
 var ep = new eventproxy(),
     count = 0;
@@ -16,9 +16,9 @@ class service {
 
     getData(valueList, callback) {
         var $self = this;
-        valueList.forEach(function(value, idx) {
-            var fp              = new feedparser(),
-                category        = {
+        valueList.forEach(function (value, idx) {
+            var fp = new feedparser(),
+                category = {
                     "category": value.name,
                     "data": []
                 }
@@ -26,7 +26,7 @@ class service {
                 .charset('gb2312')
                 .type("xml")
                 .on("error", function (err) {
-                    console.log("===== %s 获取数据失败 =====",value.name)
+                    console.log("===== %s 获取数据失败 =====", value.name)
                     console.log(err);
                 })
                 //.pipe(iconv.decodeStream("gb2312"))
@@ -34,7 +34,7 @@ class service {
                 .pipe(iconv.decodeStream("utf-8"))
                 .pipe(fp)
                 .on("error", function (err) {
-                    console.log("===== %s 解析数据失败 =====",value.name);
+                    console.log("===== %s 解析数据失败 =====", value.name);
                     console.error(err);
                 })
                 .on("readable", function () {
@@ -42,10 +42,10 @@ class service {
                         obj = null,
                         item
 
-                    while(item = $stream.read()) {
+                    while (item = $stream.read()) {
                         obj = {
-                            "title" : item.title,
-                            "link" : item.link
+                            "title": item.title,
+                            "link": item.link
                         }
                     }
 
@@ -53,7 +53,7 @@ class service {
                     category.data.push(obj);
                 })
                 .on("end", function (err) {
-                    if(err) {
+                    if (err) {
                         console.log(">>>>>> 出现错误!!!");
                         console.log(err);
                     } else {
@@ -73,9 +73,9 @@ class service {
     saveData(callback) {
         var $self = this;
         var ep = eventproxy();
-        for(var i = 0; i<$self.result.length; i++) {
-            for(var j = 0; j < 5; j++){
-                console.log($self.result[i].data[j].title,$self.result[i].data[j].link);
+        for (var i = 0; i < $self.result.length; i++) {
+            for (var j = 0; j < 5; j++) {
+                console.log($self.result[i].data[j].title, $self.result[i].data[j].link);
             }
         }
 
